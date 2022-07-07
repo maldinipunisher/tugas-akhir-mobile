@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "444989246810",
+    "firebase_url": "https://bots-fed6f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bots-fed6f",
+    "storage_bucket": "bots-fed6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444989246810:android:e8b580bd08ecfeb0317763",
+        "android_client_info": {
+          "package_name": "com.maldinipunisher.tugasakhir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444989246810-mrna9i9pa0en03gs9g9m8l1notvph951.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7zoBxmce8Qvw3i548NJctoKLh2vEgHgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444989246810-mrna9i9pa0en03gs9g9m8l1notvph951.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
