@@ -96,59 +96,61 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          body: RefreshIndicator(
-            color: accent1Color,
-            onRefresh: () async {
-              setState(() {});
+          body:
+              // RefreshIndicator(
+              //   color: accent1Color,
+              //   onRefresh: () async {
+              //     setState(() {});
+              //   },
+              //   child:
+              NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowIndicator();
+              return false;
             },
-            child: NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (overscroll) {
-                overscroll.disallowIndicator();
-                return false;
-              },
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 45.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 55.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Selamat datang,\n${widget.user.displayName}",
-                              style: TextStyle(
-                                fontSize: 24.sp,
-                              ),
+            child: ListView(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 45.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 55.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Selamat datang,\n${widget.user.displayName}",
+                            style: TextStyle(
+                              fontSize: 24.sp,
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 27.h,
-                        ),
-                        SizedBox(
-                          height: 165.h,
-                          width: 307.h,
-                          child: Image.asset("assets/images/home.png"),
-                        ),
-                        SizedBox(
-                          height: 64.h,
-                        ),
-                        if (widget.arduino != null &&
-                            (widget.arduino!.status == "on"))
-                          home(widget.arduino!),
-                        if (widget.arduino == null ||
-                            (widget.arduino!.status == "off"))
-                          notConnected(),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 27.h,
+                      ),
+                      SizedBox(
+                        height: 165.h,
+                        width: 307.h,
+                        child: Image.asset("assets/images/home.png"),
+                      ),
+                      SizedBox(
+                        height: 64.h,
+                      ),
+                      if (widget.arduino != null &&
+                          (widget.arduino!.status == "on"))
+                        home(widget.arduino!),
+                      if (widget.arduino == null ||
+                          (widget.arduino!.status == "off"))
+                        notConnected(),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
+              //   ),
             ),
           ),
         );

@@ -67,15 +67,17 @@ class _NotificationSuccessState extends State<NotificationSuccess> {
             ),
           ],
         ),
-        body: RefreshIndicator(
-          color: accent1Color,
-          onRefresh: () async {},
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowIndicator();
-              return false;
-            },
-            child: (widget.notifications!.isNotEmpty)
+        body:
+            // RefreshIndicator(
+            //   color: accent1Color,
+            //   onRefresh: () async {},
+            //   child: NotificationListener<OverscrollIndicatorNotification>(
+            //     onNotification: (overscroll) {
+            //       overscroll.disallowIndicator();
+            //       return false;
+            //     },
+            //     child:
+            (widget.notifications!.isNotEmpty)
                 ? ListView(
                     children: List.generate(
                       widget.notifications!.length,
@@ -122,9 +124,9 @@ class _NotificationSuccessState extends State<NotificationSuccess> {
                       style: TextStyle(color: Colors.black, fontSize: 12.sp),
                     ),
                   ),
-          ),
-        ),
       ),
+      //   ),
+      // ),
     );
   }
 }
@@ -144,38 +146,40 @@ class NotificationDisconected extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        body: RefreshIndicator(
-          color: accent1Color,
-          onRefresh: () async {},
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowIndicator();
-              return false;
-            },
-            child: ListView(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 10.w, top: 12.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Ionicons.chevron_back,
-                            color: Colors.black, size: 24.sp),
-                      ),
-                    ],
+        body:
+            // RefreshIndicator(
+            //   color: accent1Color,
+            //   onRefresh: () async {},
+            //   child: NotificationListener<OverscrollIndicatorNotification>(
+            //     onNotification: (overscroll) {
+            //       overscroll.disallowIndicator();
+            //       return false;
+            //     },
+            //     child:
+            ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10.w, top: 12.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Ionicons.chevron_back,
+                        color: Colors.black, size: 24.sp),
                   ),
-                ),
-                SizedBox(
-                  height: ScreenUtil().screenHeight * 0.30,
-                ),
-                notConnected(),
-              ],
+                ],
+              ),
             ),
-          ),
+            SizedBox(
+              height: ScreenUtil().screenHeight * 0.30,
+            ),
+            notConnected(),
+          ],
         ),
       ),
+      //   ),
+      // ),
     );
   }
 }

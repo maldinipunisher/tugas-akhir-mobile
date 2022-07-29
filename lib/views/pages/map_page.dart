@@ -238,46 +238,46 @@ class _MapPageSuccessState extends State<MapPageSuccess> {
         ],
       ),
       body: SafeArea(
-        child: RefreshIndicator(
-          color: accent1Color,
-          onRefresh: () async {},
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowIndicator();
-              return false;
-            },
-            child: (doneLoad)
-                ? ListView(
-                    children: [
-                      Container(
-                        width: ScreenUtil().screenWidth,
-                        height: ScreenUtil().screenHeight * 0.84,
-                        color: backgroundColor,
-                        child: GoogleMap(
-                          gestureRecognizers: <
-                              Factory<OneSequenceGestureRecognizer>>{
-                            Factory<OneSequenceGestureRecognizer>(
-                              () => EagerGestureRecognizer(),
-                            ),
-                          },
-                          compassEnabled: true,
-                          scrollGesturesEnabled: true,
-                          rotateGesturesEnabled: true,
-                          zoomControlsEnabled: false,
-                          zoomGesturesEnabled: true,
-                          markers: markers,
-                          initialCameraPosition: phonePosition,
-                          mapType: mapType,
-                          onMapCreated: (_controller) {
-                            this._controller.complete(_controller);
-                          },
+        // child: RefreshIndicator(
+        //   color: accent1Color,
+        //   onRefresh: () async {},
+        //   child: NotificationListener<OverscrollIndicatorNotification>(
+        //     onNotification: (overscroll) {
+        //       overscroll.disallowIndicator();
+        //       return false;
+        //     },
+        child: (doneLoad)
+            ? ListView(
+                children: [
+                  Container(
+                    width: ScreenUtil().screenWidth,
+                    height: ScreenUtil().screenHeight * 0.84,
+                    color: backgroundColor,
+                    child: GoogleMap(
+                      gestureRecognizers: <
+                          Factory<OneSequenceGestureRecognizer>>{
+                        Factory<OneSequenceGestureRecognizer>(
+                          () => EagerGestureRecognizer(),
                         ),
-                      ),
-                    ],
-                  )
-                : Center(child: SpinKitRing(color: accent1Color)),
-          ),
-        ),
+                      },
+                      compassEnabled: true,
+                      scrollGesturesEnabled: true,
+                      rotateGesturesEnabled: true,
+                      zoomControlsEnabled: false,
+                      zoomGesturesEnabled: true,
+                      markers: markers,
+                      initialCameraPosition: phonePosition,
+                      mapType: mapType,
+                      onMapCreated: (_controller) {
+                        this._controller.complete(_controller);
+                      },
+                    ),
+                  ),
+                ],
+              )
+            : Center(child: SpinKitRing(color: accent1Color)),
+        //   ),
+        // ),
       ),
     );
   }
@@ -294,23 +294,25 @@ class MapPageDisconected extends StatelessWidget {
           statusBarIconBrightness: Brightness.dark),
     );
     return Scaffold(
-      body: RefreshIndicator(
-        color: accent1Color,
-        onRefresh: () async {},
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll) {
-            overscroll.disallowIndicator();
-            return false;
-          },
-          child: ListView(
-            children: [
-              SizedBox(
-                height: ScreenUtil().screenHeight * 0.38,
-              ),
-              notConnected(),
-            ],
-          ),
+      body:
+          // RefreshIndicator(
+          //   color: accent1Color,
+          //   onRefresh: () async {},
+          //   child:
+          NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overscroll) {
+          overscroll.disallowIndicator();
+          return false;
+        },
+        child: ListView(
+          children: [
+            SizedBox(
+              height: ScreenUtil().screenHeight * 0.38,
+            ),
+            notConnected(),
+          ],
         ),
+        //   ),
       ),
     );
   }

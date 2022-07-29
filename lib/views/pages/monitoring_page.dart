@@ -54,140 +54,118 @@ class _MonitoringPageSuccessState extends State<MonitoringPageSuccess> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.w),
-        child: RefreshIndicator(
-          color: accent1Color,
-          onRefresh: () async {},
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowIndicator();
-              return false;
-            },
-            child: ListView(
-              children: [
-                StreamBuilder<DocumentSnapshot>(
-                    stream: DataService.getStatus,
-                    builder: ((context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done ||
-                          snapshot.connectionState == ConnectionState.active) {
-                        final data = snapshot.data!.data() as Map;
-                        final List<NotificationModel?> notifications = [];
-                        for (var notification in data['notifications']) {
-                          notifications
-                              .add(NotificationModel.toMap(notification));
-                        }
-                        arduino = Arduino(DataService.deviceId,
-                            trigger: data['trigger'],
-                            // alarm: data['alarm'],
-                            latitude: double.tryParse(data['latitude']) ?? 0,
-                            longtitude:
-                                double.tryParse(data['longtitude']) ?? 0,
-                            lock: data['lock'],
-                            lastOnline: (data['waktu'] as Timestamp).toDate(),
-                            firstStart:
-                                (data['waktu_mulai'] as Timestamp).toDate(),
-                            status: data['status'],
-                            notifications: notifications);
-                      }
+        // child: RefreshIndicator(
+        //   color: accent1Color,
+        //   onRefresh: () async {},
+        //   child: NotificationListener<OverscrollIndicatorNotification>(
+        //     onNotification: (overscroll) {
+        //       overscroll.disallowIndicator();
+        //       return false;
+        //     },
+        child: ListView(
+          children: [
+            StreamBuilder<DocumentSnapshot>(
+                stream: DataService.getStatus,
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done ||
+                      snapshot.connectionState == ConnectionState.active) {
+                    final data = snapshot.data!.data() as Map;
+                    final List<NotificationModel?> notifications = [];
+                    for (var notification in data['notifications']) {
+                      notifications.add(NotificationModel.toMap(notification));
+                    }
+                    arduino = Arduino(DataService.deviceId,
+                        trigger: data['trigger'],
+                        // alarm: data['alarm'],
+                        latitude: double.tryParse(data['latitude']) ?? 0,
+                        longtitude: double.tryParse(data['longtitude']) ?? 0,
+                        lock: data['lock'],
+                        lastOnline: (data['waktu'] as Timestamp).toDate(),
+                        firstStart: (data['waktu_mulai'] as Timestamp).toDate(),
+                        status: data['status'],
+                        notifications: notifications);
+                  }
 
-                      return (arduino != null)
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                  SizedBox(height: 54.h),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      card(
-                                        Icon(Ionicons.bug_outline,
-                                            color: accentColor, size: 32.sp),
-                                        "Status Perangkat",
-                                        Text(
-                                          arduino!.status,
-                                          style: TextStyle(
-                                              color: successTextColor,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ),
-                                      // card(
-                                      //   Icon(Ionicons.alarm_outline,
-                                      //       color: warningTextColor,
-                                      //       size: 32.sp),
-                                      //   "Status Alarm",
-                                      //   Text(
-                                      //     arduino!.alarm,
-                                      //     style: TextStyle(
-                                      //         color: greyTextColor,
-                                      //         fontSize: 14.sp),
-                                      //   ),
-                                      // ),
-                                    ],
+                  return (arduino != null)
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                              SizedBox(height: 54.h),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  card(
+                                    Icon(Ionicons.bug_outline,
+                                        color: accentColor, size: 32.sp),
+                                    "Status Perangkat",
+                                    Text(
+                                      arduino!.status,
+                                      style: TextStyle(
+                                          color: successTextColor,
+                                          fontSize: 14.sp),
+                                    ),
                                   ),
-                                  SizedBox(
-                                    height: 22.h,
+                                  card(
+                                    Icon(Ionicons.power_outline,
+                                        color: Colors.blue, size: 32.sp),
+                                    "Pertama Online",
+                                    Text(
+                                      formatDuration(DateTime.now()
+                                          .toLocal()
+                                          .difference(arduino!.firstStart)),
+                                      style: TextStyle(
+                                          color: successTextColor,
+                                          fontSize: 14.sp),
+                                    ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      card(
-                                        Icon(Ionicons.hourglass_outline,
-                                            color: orangeColor, size: 32.sp),
-                                        "Terakhir Online",
-                                        Text(
-                                          formatDuration(DateTime.now()
-                                              .toLocal()
-                                              .difference(arduino!.lastOnline)),
-                                          style: TextStyle(
-                                              color: successTextColor,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ),
-                                      card(
-                                        Icon(Ionicons.lock_closed,
-                                            color: purpleColor, size: 32.sp),
-                                        "Status Keamanan",
-                                        Text(
-                                          arduino!.lock,
-                                          style: TextStyle(
-                                              color: warningTextColor,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ),
-                                    ],
+                                ],
+                              ),
+                              SizedBox(
+                                height: 22.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  card(
+                                    Icon(Ionicons.hourglass_outline,
+                                        color: orangeColor, size: 32.sp),
+                                    "Terakhir Online",
+                                    Text(
+                                      formatDuration(DateTime.now()
+                                          .toLocal()
+                                          .difference(arduino!.lastOnline)),
+                                      style: TextStyle(
+                                          color: successTextColor,
+                                          fontSize: 14.sp),
+                                    ),
                                   ),
-                                  SizedBox(
-                                    height: 22.h,
+                                  card(
+                                    Icon(Ionicons.lock_closed,
+                                        color: purpleColor, size: 32.sp),
+                                    "Status Keamanan",
+                                    Text(
+                                      arduino!.lock,
+                                      style: TextStyle(
+                                          color: warningTextColor,
+                                          fontSize: 14.sp),
+                                    ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      card(
-                                        Icon(Ionicons.power_outline,
-                                            color: Colors.blue, size: 32.sp),
-                                        "Pertama Online",
-                                        Text(
-                                          formatDuration(DateTime.now()
-                                              .toLocal()
-                                              .difference(arduino!.firstStart)),
-                                          style: TextStyle(
-                                              color: successTextColor,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ),
-                                      const Text(""),
-                                    ],
-                                  )
-                                ])
-                          : Center(
-                              child: notConnected(),
-                            );
-                    }))
-              ],
-            ),
-          ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 22.h,
+                              ),
+                            ])
+                      : Center(
+                          child: notConnected(),
+                        );
+                }))
+          ],
+          // ),
         ),
+        // ),
       ),
     );
   }
@@ -233,24 +211,26 @@ class MonitoringPageDisconected extends StatelessWidget {
           statusBarIconBrightness: Brightness.dark),
     );
     return Scaffold(
-      body: RefreshIndicator(
-        color: accent1Color,
-        onRefresh: () async {},
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll) {
-            overscroll.disallowIndicator();
-            return false;
-          },
-          child: ListView(
-            children: [
-              SizedBox(
-                height: ScreenUtil().screenHeight * 0.38,
-              ),
-              notConnected(),
-            ],
+      body:
+          // RefreshIndicator(
+          //   color: accent1Color,
+          //   onRefresh: () async {},
+          //   child: NotificationListener<OverscrollIndicatorNotification>(
+          //     onNotification: (overscroll) {
+          //       overscroll.disallowIndicator();
+          //       return false;
+          //     },
+          //     child:
+          ListView(
+        children: [
+          SizedBox(
+            height: ScreenUtil().screenHeight * 0.38,
           ),
-        ),
+          notConnected(),
+        ],
       ),
+      // ),
+      // ),
     );
   }
 }
