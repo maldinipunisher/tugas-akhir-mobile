@@ -6,7 +6,7 @@ import 'package:controller_mobile/bloc/page_bloc.dart';
 import 'package:controller_mobile/main.dart';
 import 'package:controller_mobile/models/models.dart';
 import 'package:controller_mobile/services/services.dart';
-import 'package:controller_mobile/ui/widgets/widgets.dart';
+import 'package:controller_mobile/views/widgets/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

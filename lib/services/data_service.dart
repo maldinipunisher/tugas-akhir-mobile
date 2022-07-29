@@ -32,9 +32,8 @@ class DataService {
   static Future<bool> update(Arduino arduino) async {
     try {
       _db.collection("data").doc(deviceId).update({
-        "alarm": arduino.alarm,
-        "latitude": arduino.latitude,
-        "longtitude": arduino.longtitude,
+        "latitude": arduino.latitude.toString(),
+        "longtitude": arduino.longtitude.toString(),
         "lock": arduino.lock,
         "status": arduino.status,
       });

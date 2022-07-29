@@ -53,9 +53,9 @@ class _NavigationPageState extends State<NavigationPage> {
               arduino = Arduino(
                 widget.deviceId,
                 trigger: data['trigger'],
-                alarm: data['alarm'],
-                latitude: data['latitude'],
-                longtitude: data['longtitude'],
+                // alarm: data['alarm'],
+                latitude: double.tryParse(data['latitude']) ?? 0,
+                longtitude: double.tryParse(data['longtitude']) ?? 0,
                 lock: data['lock'],
                 firstStart: (data['waktu_mulai'] as Timestamp).toDate(),
                 lastOnline: (data['waktu'] as Timestamp).toDate(),

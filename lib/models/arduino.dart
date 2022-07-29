@@ -2,7 +2,6 @@ part of 'models.dart';
 
 class Arduino {
   final String deviceId;
-  String alarm;
   double latitude;
   double longtitude;
   String lock;
@@ -10,11 +9,10 @@ class Arduino {
   DateTime lastOnline;
   DateTime firstStart;
   String trigger;
-  List<NotificationModel?>? notifications ; 
+  List<NotificationModel?>? notifications;
 
   Arduino(
     this.deviceId, {
-    required this.alarm,
     required this.latitude,
     required this.longtitude,
     required this.lock,

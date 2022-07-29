@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late bool isAlarmOn;
+  // late bool isAlarmOn;
   late bool isLockOn;
 
   @override
@@ -20,11 +20,11 @@ class _HomePageState extends State<HomePage> {
     FirebaseMessaging.instance.getToken().then((token) {
       DataService.setTokenApp(token: token);
     });
-    isAlarmOn = (widget.arduino == null)
-        ? false
-        : (widget.arduino!.alarm == "on")
-            ? true
-            : false;
+    // isAlarmOn = (widget.arduino == null)
+    //     ? false
+    //     : (widget.arduino!.alarm == "on")
+    //         ? true
+    //         : false;
 
     isLockOn = (widget.arduino == null)
         ? false
@@ -158,59 +158,59 @@ class _HomePageState extends State<HomePage> {
 
   Widget home(Arduino arduino) => Column(
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
-            height: 45.h,
-            width: 319.w,
-            decoration: BoxDecoration(
-              color: accent1Color,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(46.r),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Ionicons.alarm_outline,
-                      color: Colors.white,
-                      size: 32.sp,
-                    ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Text(
-                      "Alarm",
-                      style: TextStyle(fontSize: 14.sp, color: Colors.white),
-                    ),
-                  ],
-                ),
-                Switch(
-                    trackColor: MaterialStateProperty.all(
-                        Colors.white.withOpacity(0.5)),
-                    inactiveThumbColor: Colors.white,
-                    activeColor: accent2Color,
-                    value: (widget.arduino == null)
-                        ? false
-                        : (widget.arduino!.alarm == "on")
-                            ? true
-                            : false,
-                    onChanged: (alarm) async {
-                      setState(() {
-                        widget.arduino!.alarm = (alarm) ? "on" : "off";
-                      });
-                      final result = await DataService.update(widget.arduino!);
-                      if (!result) {
-                        setState(() {
-                          widget.arduino!.alarm = "off";
-                        });
-                      }
-                    })
-              ],
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(horizontal: 25.w),
+          //   height: 45.h,
+          //   width: 319.w,
+          //   decoration: BoxDecoration(
+          //     color: accent1Color,
+          //     shape: BoxShape.rectangle,
+          //     borderRadius: BorderRadius.circular(46.r),
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //         children: [
+          //           Icon(
+          //             Ionicons.alarm_outline,
+          //             color: Colors.white,
+          //             size: 32.sp,
+          //           ),
+          //           SizedBox(
+          //             width: 4.w,
+          //           ),
+          //           Text(
+          //             "Alarm",
+          //             style: TextStyle(fontSize: 14.sp, color: Colors.white),
+          //           ),
+          //         ],
+          //       ),
+          //       Switch(
+          //           trackColor: MaterialStateProperty.all(
+          //               Colors.white.withOpacity(0.5)),
+          //           inactiveThumbColor: Colors.white,
+          //           activeColor: accent2Color,
+          //           value: (widget.arduino == null)
+          //               ? false
+          //               : (widget.arduino!.alarm == "on")
+          //                   ? true
+          //                   : false,
+          //           onChanged: (alarm) async {
+          //             setState(() {
+          //               widget.arduino!.alarm = (alarm) ? "on" : "off";
+          //             });
+          //             final result = await DataService.update(widget.arduino!);
+          //             if (!result) {
+          //               setState(() {
+          //                 widget.arduino!.alarm = "off";
+          //               });
+          //             }
+          //           })
+          //     ],
+          //   ),
+          // ),
           SizedBox(
             height: 18.h,
           ),

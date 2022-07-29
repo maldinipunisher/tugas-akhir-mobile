@@ -77,9 +77,10 @@ class _MonitoringPageSuccessState extends State<MonitoringPageSuccess> {
                         }
                         arduino = Arduino(DataService.deviceId,
                             trigger: data['trigger'],
-                            alarm: data['alarm'],
-                            latitude: data['latitude'],
-                            longtitude: data['longtitude'],
+                            // alarm: data['alarm'],
+                            latitude: double.tryParse(data['latitude']) ?? 0,
+                            longtitude:
+                                double.tryParse(data['longtitude']) ?? 0,
                             lock: data['lock'],
                             lastOnline: (data['waktu'] as Timestamp).toDate(),
                             firstStart:
@@ -108,18 +109,18 @@ class _MonitoringPageSuccessState extends State<MonitoringPageSuccess> {
                                               fontSize: 14.sp),
                                         ),
                                       ),
-                                      card(
-                                        Icon(Ionicons.alarm_outline,
-                                            color: warningTextColor,
-                                            size: 32.sp),
-                                        "Status Alarm",
-                                        Text(
-                                          arduino!.alarm,
-                                          style: TextStyle(
-                                              color: greyTextColor,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ),
+                                      // card(
+                                      //   Icon(Ionicons.alarm_outline,
+                                      //       color: warningTextColor,
+                                      //       size: 32.sp),
+                                      //   "Status Alarm",
+                                      //   Text(
+                                      //     arduino!.alarm,
+                                      //     style: TextStyle(
+                                      //         color: greyTextColor,
+                                      //         fontSize: 14.sp),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                   SizedBox(
